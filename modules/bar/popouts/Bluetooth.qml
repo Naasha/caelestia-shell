@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import qs.widgets
 import qs.config
-import qs.utils
 import Quickshell
 import Quickshell.Bluetooth
 import QtQuick
@@ -13,9 +12,57 @@ ColumnLayout {
 
     spacing: Appearance.spacing.small / 2
 
-    StyledText {
+    RowLayout {
+        Layout.fillWidth: true
         Layout.bottomMargin: Appearance.spacing.small
-        text: qsTr("Bluetooth %1").arg(BluetoothAdapterState.toString(Bluetooth.defaultAdapter.state).toLowerCase())
+        spacing: Appearance.spacing.small
+
+        StyledText {
+            Layout.fillWidth: true
+            elide: Text.ElideRight
+            text: qsTr("Bluetooth %1").arg(BluetoothAdapterState.toString(Bluetooth.defaultAdapter.state).toLowerCase())
+        }
+
+        Item {
+            id: toggleBtn
+            implicitWidth: implicitHeight
+            implicitHeight: toggleIcon.implicitHeight + Appearance.padding.small * 2
+
+            MaterialIcon {
+                id: toggleIcon
+                anchors.centerIn: parent
+                animate: true
+                text: Bluetooth.defaultAdapter.enabled ? "bluetooth_disabled" : "bluetooth"
+            }
+
+            StateLayer {
+                anchors.fill: parent
+                radius: Appearance.rounding.full
+                function onClicked(): void {
+                    Quickshell.execDetached(["rfkill", "toggle", "bluetooth"]);
+                }
+            }
+        }
+
+        Item {
+            id: settingsBtn
+            implicitWidth: implicitHeight
+            implicitHeight: settingsIcon.implicitHeight + Appearance.padding.small * 2
+
+            MaterialIcon {
+                id: settingsIcon
+                anchors.centerIn: parent
+                text: "settings"
+            }
+
+            StateLayer {
+                anchors.fill: parent
+                radius: Appearance.rounding.full
+                function onClicked(): void {
+                    Quickshell.execDetached(["sh", "-c", "kcmshell6 kcm_bluetooth"]);
+                }
+            }
+        }
     }
 
     StyledText {
