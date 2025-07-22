@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import qs.widgets
+import qs.services
 import qs.config
 import Quickshell
 import Quickshell.Bluetooth
@@ -28,11 +29,32 @@ ColumnLayout {
             implicitWidth: implicitHeight
             implicitHeight: toggleIcon.implicitHeight + Appearance.padding.small * 2
 
+            StyledRect {
+                anchors.fill: parent
+                implicitWidth: child.implicitWidth + Appearance.padding.normal * 2
+                implicitHeight: child.implicitHeight + Appearance.padding.smaller * 2
+
+                color: Bluetooth.defaultAdapter.enabled ? Colours.palette.m3primary : Colours.palette.m3surface
+                radius: Appearance.rounding.normal
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: Appearance.anim.durations.short
+                    }
+                }
+            }
+
             MaterialIcon {
                 id: toggleIcon
                 anchors.centerIn: parent
-                animate: true
-                text: Bluetooth.defaultAdapter.enabled ? "bluetooth_disabled" : "bluetooth"
+                text: Bluetooth.defaultAdapter.enabled ? "bluetooth" : "bluetooth_disabled"
+                color: Bluetooth.defaultAdapter.enabled ? Colours.palette.m3onPrimary : Colours.palette.m3onSurface
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: Appearance.anim.durations.short
+                    }
+                }
             }
 
             StateLayer {
@@ -51,6 +73,7 @@ ColumnLayout {
 
             MaterialIcon {
                 id: settingsIcon
+                color: Colours.palette.m3onSurface
                 anchors.centerIn: parent
                 text: "settings"
             }
