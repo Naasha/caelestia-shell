@@ -64,7 +64,7 @@ Item {
     anchors.bottom: parent.bottom
     anchors.left: parent.left
 
-    implicitWidth: child.implicitWidth + Config.border.thickness * 2
+    implicitWidth: child.implicitWidth + Config.border.thickness / 1.5
 
     Item {
         id: child
