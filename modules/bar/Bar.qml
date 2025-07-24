@@ -6,6 +6,7 @@ import "components"
 import "components/workspaces"
 import Quickshell
 import QtQuick
+import Quickshell.Hyprland
 
 Item {
     id: root
@@ -81,6 +82,10 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: Appearance.padding.large
+
+            function onClicked(): void {
+                Hyprland.dispatch('global quickshell:overviewToggle');
+            }
         }
 
         StyledRect {

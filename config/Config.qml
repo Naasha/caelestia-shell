@@ -11,9 +11,11 @@ Singleton {
     property alias bar: adapter.bar
     property alias border: adapter.border
     property alias dashboard: adapter.dashboard
+    property alias hacks: adapter.hacks
     property alias launcher: adapter.launcher
     property alias notifs: adapter.notifs
     property alias osd: adapter.osd
+    property alias overview: adapter.overview
     property alias session: adapter.session
     property alias winfo: adapter.winfo
     property alias lock: adapter.lock
@@ -33,9 +35,11 @@ Singleton {
             property BarConfig bar: BarConfig {}
             property BorderConfig border: BorderConfig {}
             property DashboardConfig dashboard: DashboardConfig {}
+            property HacksConfig hacks: HacksConfig {}
             property LauncherConfig launcher: LauncherConfig {}
             property NotifsConfig notifs: NotifsConfig {}
             property OsdConfig osd: OsdConfig {}
+            property OverviewConfig overview: OverviewConfig {}
             property SessionConfig session: SessionConfig {}
             property WInfoConfig winfo: WInfoConfig {}
             property LockConfig lock: LockConfig {}
